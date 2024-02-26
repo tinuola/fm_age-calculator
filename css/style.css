@@ -1,0 +1,23 @@
+:root {
+  --var: value
+}
+
+/* Content */
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  /* grid-template-rows: 1fr auto; */
+  justify-items: center;
+  align-items: center;
+}
+
+.fm-byline {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.fm-byline,
+.fm-byline a {}
