@@ -1,5 +1,5 @@
 :root {
-  --var: value
+  --var: value;
 }
 
 /* Content */
@@ -20,4 +20,6 @@ body {
 }
 
 .fm-byline,
-.fm-byline a {}
+.fm-byline a {
+  color: hsl(228, 45%, 44%);
+}
