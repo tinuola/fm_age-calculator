@@ -35,7 +35,7 @@ function parseSubmittedDay() {
     return null
   }
 
-  if (inputDy.value > today.getDate()) {
+  if (inputDy.value > today.getDate() && !inputMn.value) {
     validEntry.day = false
     errorMsg(inputDy, 'Must be in the past')
     return null
@@ -44,6 +44,8 @@ function parseSubmittedDay() {
   validEntry.day = true
   return inputDy.value
 }
+
+// Need to validate month and # of days
 
 function parseSubmittedMonth() {
   const dayExists = parseSubmittedDay()
@@ -60,7 +62,8 @@ function parseSubmittedMonth() {
   }
 
   if (inputMn.value > today.getMonth() + 1 && !inputYr.value) {
-    validEntry.Month = false
+    validEntry.month = false
+    // validEntry.year = true
     errorMsg(inputMn, 'Must be in the past')
     return null
   }
@@ -74,10 +77,11 @@ function parseSubmittedYear() {
   const dayExists = parseSubmittedDay()
   const monthExists = parseSubmittedMonth()
 
-  console.log(dayExists)
-  console.log(monthExists)
+  // console.log(dayExists)
+  // console.log(monthExists)
 
   if (dayExists && monthExists && !inputYr.value) {
+    // if (inputDy.value && inputMn.value && !inputYr.value) {
     validEntry.year = true
     return today.getFullYear()
   }
@@ -111,7 +115,7 @@ function parseFullSubmittedDate() {
   const parsedMonth = parseSubmittedMonth()
   const parsedYear = parseSubmittedYear()
 
-  // console.log(parsedDay, parsedMonth, parsedYear)
+  console.log(parsedDay, parsedMonth, parsedYear)
 
   if (parsedDay && parsedMonth && parsedYear) {
     // Month, day, year - new Date('5 20 1069')
@@ -142,23 +146,12 @@ function calculateDates() {
   }
 }
 
-const submitDate = () => {
-  // if (validEntry.day && validEntry.month && validEntry.year) {
-  console.log('submitted')
-  const test = calculateDates()
-  console.log(test)
-  // } else {
-  //   displayError()
-  // }
-}
-
-// formEle.addEventListener('input', (e) => {
-//   console.log(e.target.name)
-//   const { name, value } = e.target
-// })
-
 formEle.addEventListener('submit', (e) => {
   e.preventDefault()
 
-  submitDate()
+  if (calculateDates()) {
+    inputYr.value = ''
+    inputMn.value = ''
+    inputDy.value = ''
+  }
 })
